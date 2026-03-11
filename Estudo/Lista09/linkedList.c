@@ -18,7 +18,7 @@ ptr_no lista; // cria a linked list
 // Prototipação
 void menu () {
   printf("\nEntre com uma das opcoes: \n");
-  printf("1 - Inserir um elemento no finak da lista\n");
+  printf("1 - Inserir um elemento na lista\n");
   printf("2 - Remover um elemento da lista\n");
   printf("0 - Sair\n");
 }
@@ -58,10 +58,17 @@ void lista_remover(ptr_no lista) {
   aux = (ptr_no)malloc(sizeof(struct no));
 
   while(lista->dado != valor) {
-    
+    if (lista->proximo == NULL) {
+      break;
+    }
+    aux = lista; // Criando uma cópia do elemento enquanto está passando por ele
+    lista = lista->proximo;
+
   }
 
-  
+  if (lista->dado == valor) {
+    aux->proximo = lista->proximo;
+  }
 
 }
 
@@ -83,8 +90,10 @@ int main() {
     {
     case 1:
       lista_inserir(lista);
+      break;
     case 2:
     lista_remover(lista);
+    break;
     }
   } while (op != 0);
   return 0;
